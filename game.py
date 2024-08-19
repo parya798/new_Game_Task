@@ -2,7 +2,7 @@ import random
 
 def guess_number(secret_number, attempts=5):
     for attempt in range(attempts):
-        user_guess = int(input("the number is between (1 to 10): 6"))
+        user_guess = int(input("the number is between (1 to 10): "))
         
         if user_guess < secret_number:
             print("too little")
