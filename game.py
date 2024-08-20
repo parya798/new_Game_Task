@@ -1,8 +1,15 @@
 import random
 
 def guess_number(secret_number, attempts=5):
-    for attempt in range(attempts):
-        user_guess = int(input("the number is between (1 to 10): "))
+    attempts_left = attempts
+    while True:
+        user_guess = input("the number is between (1 to 10): ")
+        
+        try:
+            user_guess = int(user_guess)
+        except ValueError:
+            print("please add a number")
+            continue
         
         if user_guess < secret_number:
             print("too little")
@@ -12,12 +19,20 @@ def guess_number(secret_number, attempts=5):
             print("congrats! you guessed the number")
             return
     
-    print(f"sorry! out of chances: {secret_number}")
+        attempts_left -= 1
+        if attempts_left == 0:
+            print(f"sorry! out of chances: {secret_number}")
+            break
     
 def play_game():
-    secret_number = random.randint(1, 10)
-    attempts = 5
-    print("The had begun, guess your number!")
-    guess_number(secret_number, attempts)
-    
+    while True:
+        secret_number = random.randint(1, 10)
+        attempts = 5
+        print("The game had begun, guess your number!")
+        guess_number(secret_number, attempts)
+        
+        play_again = input("do you wanna play again? (yes/no)")
+        if play_again.lower() != "yes":
+            break
+        
 play_game()
